@@ -1,15 +1,14 @@
 const expIsAudioFile = /\.mp3$/
-const expMetadata = /^(.*?)\s*-\s*(.*?)\s*\(.*\).mp3$/i
+const expMetadata = /^(.*?)\s*-\s*(.*?)(?:\s*\(.*\)\s*)*.mp3$/i
 
 export type BasicMetadata = {
-  filename: string,
-  artist: ?string,
+  artistCreditsString: ?string,
   title: ?string,
 }
 
 export const isAudioFile = (filename: string): boolean => expIsAudioFile.test(filename)
 export function extractMetadataFromFilename(filename: string): BasicMetadata {
-  const [_, artist, title] = expMetadata.exec(filename) || []
+  const [, artistCreditsString, title] = expMetadata.exec(filename) || []
 
-  return { filename, artist, title }
+  return { artistCreditsString, title }
 }

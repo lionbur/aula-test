@@ -6,10 +6,10 @@ export type S3Object = {
   ETag: string,
 }
 
-export default async function (): Promise<Array<S3Object>> {
+export default async function (bucket: string): Promise<Array<S3Object>> {
   const client = createS3Client()
+  const objects = await client.listObjects(bucket)
 
-  const objects = await client.listObjects(process.env.S3_BUCKET)
   return objects
     .Contents
     .filter(({ Key }) => /\.mp3$/.test(Key))
