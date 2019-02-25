@@ -11,7 +11,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "aws-s3-promisified": "^2.0.0",
-    "dotenv": "^6.2.0"
+    "dotenv": "^6.2.0",
+    "musicbrainz": "^0.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",

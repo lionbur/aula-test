@@ -1,19 +1,57 @@
-const expIsAudioFile = /\.mp3$/
-const expMetaData = /^(.*?)\s*-\s*(.*?)\s*\(.*\).mp3$/i
+import mb from 'musicbrainz'
 
-export type BasicMetadata = {
-  filename: string,
-  author: ?string,
-  title: ?string,
-}
+import { extractMetadataFromFilename, type BasicMetadata } from './fromFilename'
+export { isAudioFile } from './fromFilename'
 
-export const isAudioFile = (filename: string): boolean => expIsAudioFile.test(filename)
-function extractMetadataFromFilename(filename): BasicMetadata {
-  const [_, author, title] = expMetaData.exec(filename) || []
+const searchArtists = (query: string): Promise<Array<string>> => new Promise(
+  (resolve, reject) => {
+    mb.searchArtists(query, {}, (err, artists) => {
+      if (err) {
+        return void reject(err)
+      }
+      resolve(artists)
+    })
+  }
+)
 
-  return { filename, author, title }
-}
+const searchRecordings = (title: string, artist: string): Promise<Array<string>> => new Promise(
+  (resolve, reject) => {
+    mb.searchRecordings(title, { artist }, (err, recordings) => {
+      if (err) {
+        return void reject(err)
+      }
+      resolve(recordings)
+    })
+  }
+)
+
+const loadMoreData = (loader: object, properties: Array<string>): Promise<void> => new Promise(
+  (resolve: () => void) => {
+    loader.load(properties, resolve)
+  }
+)
 
 export async function extractMetadata(filename: string): any {
-  return extractMetadataFromFilename(filename)
+  const basicMetadata = extractMetadataFromFilename(filename)
+  const matchingRecordings = await searchRecordings(basicMetadata.title, basicMetadata.artist)
+
+  if (matchingRecordings && matchingRecordings.length) {
+    const mostMatchingRecording = matchingRecordings[0]
+
+    await loadMoreData(mostMatchingRecording, ['artists'])
+
+    const metadata = {
+      ...basicMetadata,
+      artist: mostMatchingRecording.artist,
+    }
+
+    if (mostMatchingRecording.artistCredits) {
+      metadata.artistCredits = mostMatchingRecording
+        .artistCredits
+        .map(({ artist: { name } }) => name)
+    }
+    return metadata
+  }
+
+  return basicMetadata
 }

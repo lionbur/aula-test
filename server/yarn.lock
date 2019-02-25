@@ -2300,6 +2300,14 @@ ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
+musicbrainz@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/musicbrainz/-/musicbrainz-0.2.6.tgz#e9765ee3fcde78bb47978594d0ed73020ab392af"
+  dependencies:
+    request "1.9.x"
+    timetrickle "~0.1.1"
+    xml2js "0.1.x"
+
 mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
@@ -2884,6 +2892,10 @@ repeat-string@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/repeat-string/-/repeat-string-1.6.1.tgz#8dcae470e1c88abc2d600fff4a776286da75e637"
 
+request@1.9.x:
+  version "1.9.9"
+  resolved "https://registry.yarnpkg.com/request/-/request-1.9.9.tgz#af231fe87e3725a5db46ff74833f3aa0ebfd9151"
+
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
@@ -2953,7 +2965,7 @@ sax@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
 
-sax@>=0.6.0, sax@^1.2.4:
+sax@>=0.1.1, sax@>=0.6.0, sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
@@ -3241,6 +3253,10 @@ timed-out@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
 
+timetrickle@~0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/timetrickle/-/timetrickle-0.1.2.tgz#39a32c6c22913388724c9258f25895098a1b3ae2"
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -3515,6 +3531,12 @@ write@1.0.3:
 xdg-basedir@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
+
+xml2js@0.1.x:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.1.14.tgz#5274e67f5a64c5f92974cd85139e0332adc6b90c"
+  dependencies:
+    sax ">=0.1.1"
 
 xml2js@0.4.19:
   version "0.4.19"
