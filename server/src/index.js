@@ -2,12 +2,12 @@
 
 // $FlowFixMe
 import 'dotenv/config'
+import getFileList, { type S3Object } from './fileList'
 
-function main() {
-  const { S3_BUCKET } = process.env
-
-  // $FlowFixMe
-  console.log(`BUCKET is ${S3_BUCKET}`)
+async function main() {
+  const mp3Files: Array<S3Object> = await getFileList()
+  console.log(mp3Files
+    .map(({ Key}) => Key))
 }
 
-main()
+void main()
