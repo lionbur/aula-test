@@ -23,6 +23,8 @@ from an S3 bucket maintained for testing, and broken down to extracting
 titles and authors and expects given payloads.
 * **More Scripts** `clean`, `serve` and `build:production`
 * **Hashing**: Using `ETag` from `S3` as the key to cache metadata
+* Adding more fields to `package.json` like `version` and `engine`,
+that nobody will ever read...
 
 ## API
 * `/api/v1/titles` a list of all titles `[{id, title, artistCreditsString}]
@@ -32,11 +34,19 @@ it to client
 
 **Note:** `.env` file is not committed as it contains AWS access keys
 
+## Prerequisites
+Node >= 9.x
+
+This project was never tested on a Windows machine. If you find any issues,
+please send a detailed report to `/dev/null` or to `nobody@here.com`,
+and I will do my worst to assist you. For more info, please see
+my `no-support-whatsoever` SLA.
+
 ## Install
 ```$xslt
 yarn
 ```
-
+...if you're using `npm` please type... -- nah! it's your problem... 8-)
 ## Run
 ```$xslt
 yarn start
