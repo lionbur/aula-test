@@ -3,31 +3,28 @@
 
 // $FlowFixMe
 import 'dotenv/config'
-import getFileList, { type S3Object } from './fileList'
-import { isAudioFile, extractMetadata } from './metadata'
+// $FlowFixMe
+import Koa from 'koa'
+
+import createIndexRouter from './routes'
 
 async function main() {
-  const { S3_BUCKET } = process.env
+  const { S3_BUCKET, PORT = 3000 } = process.env
 
   if (!S3_BUCKET) {
     console.error('Configuration is missing')
     return void process.exit(1)
   }
 
-  const objects: Array<S3Object> = await getFileList(S3_BUCKET)
-  const metadatas = await Promise.all(
-    objects
-      .map(({ Key }) => Key)
-      .filter(isAudioFile)
-      .map(extractMetadata)
-  )
+  console.log('Initializing ...')
 
-  console.log(metadatas
-    .map(metadata => ({
-      ...metadata,
-      url: `https://s3-eu-west-1.amazonaws.com/${S3_BUCKET}/${encodeURIComponent(metadata.filename)}`,
-    }))
-  )
+  const app = new Koa()
+  const router = await createIndexRouter(S3_BUCKET)
+
+  app.use(router.routes())
+  app.listen(PORT)
+
+  console.log(`Server is listening on port ${PORT || 0}`)
 }
 
 void main()
